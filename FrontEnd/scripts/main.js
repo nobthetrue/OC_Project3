@@ -26,7 +26,6 @@ async function fetchAndDisplayWorks() {
 fetchAndDisplayWorks();
 
 
-
 const btnObjets = document.querySelector(".btn-filtre-objets");
 btnObjets.addEventListener("click", function() {
     const objetsFiltrer = works.filter(function(work) {
