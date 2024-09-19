@@ -26,7 +26,7 @@
 <main>
     <section class="main-login">
         <h2>Log In</h2>
-        <form class="formulaire-connexion" action="#" method="post">
+        <form class="formulaire-connexion" id="formulaire-connexion">
             <label for="email">E-mail</label>
             <input type="text" name="email" id="email">
 			<span id="error-message-email" style="color: red;"></span>
@@ -34,6 +34,7 @@
             <input type="password" name="password" id="password">
 			<span id="error-message-password" style="color: red;"></span>
             <input id="btn-connexion"  type="submit" value="Se Connecter">
+			<span id="error-message" style="color: red;"></span>
         </form>
         <p>Mot de passe oublié</p>
     </section>

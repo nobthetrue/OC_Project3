@@ -1,33 +1,3 @@
-/*function listenerEnvoiIdentifiant () {
-
-    const formulaireConnexion = document.querySelector(".formulaire-connexion");
-
-    const inputConnexion = document.getElementById("btn-connexion")
-
-    formulaireConnexion.addEventListener("submit", function(event) {
-
-        const emailConnexion = document.getElementById("email");
-
-        event.preventDefault();
-
-        const identifiant = {
-            email: event.target.querySelector("#email").value,
-            password: event.target.querySelector("#password").value
-        }
-
-        const chargeUtile = JSON.stringify(identifiant);
-
-        fetch("http://localhost:5678/api/users/login", {
-            method: "POST",
-            headers: { "Content-Type" : "application/json"},
-            body: chargeUtile
-        })
-    })
-}*/
-
-
-
-
 const formulaireConnexion = document.querySelector(".formulaire-connexion");
 
 formulaireConnexion.addEventListener("submit", function(event) {
@@ -55,38 +25,7 @@ formulaireConnexion.addEventListener("submit", function(event) {
     }
 })
 
-
-/*function listenerEnvoiIdentifiant () {
-    formulaireConnexion.addEventListener("submit", async function(event) {
-
-        const reponse = await fetch("http://localhost:5678/api-docs/#/default/post_users_login")
-        const identifiantsEnregistres = await reponse.json();
-        console.log(identifiantsEnregistres)
-        const emailConnexion = document.getElementById("email");
-
-        event.preventDefault();
-
-        const identifiants = {
-            email: event.target.querySelector("#email").value,
-            password: event.target.querySelector("#password").value
-        }
-
-        const chargeUtile = JSON.stringify(identifiants);
-        window.localStorage.setItem("identifiants", chargeUtile)
-
-        fetch("http://localhost:5678/api-docs/#/default/post_users_login", {
-            method: "POST",
-            headers: { "Content-Type" : "application/json"},
-            body: chargeUtile
-        })
-
-        
-
-    })    
-}*/
-
 function listenerEnvoiIdentifiant() {
-    const formulaireConnexion = document.getElementById("formulaireConnexion");
 
     formulaireConnexion.addEventListener("submit", async function(event) {
         // Empêche le comportement par défaut du formulaire (rechargement de la page)
@@ -97,7 +36,7 @@ function listenerEnvoiIdentifiant() {
             email: event.target.querySelector("#email").value,
             password: event.target.querySelector("#password").value
         };
-
+        console.log(identifiants)
         // Convertit les identifiants en chaîne JSON
         const chargeUtile = JSON.stringify(identifiants);
 
@@ -108,6 +47,7 @@ function listenerEnvoiIdentifiant() {
                 headers: { "Content-Type": "application/json" },
                 body: chargeUtile
             });
+            console.log(reponse)
 
             // Si la réponse est correcte (statut 200)
             if (reponse.ok) {
@@ -115,9 +55,10 @@ function listenerEnvoiIdentifiant() {
 
                 // Stocke le token d'authentification dans le localStorage
                 window.localStorage.setItem("authToken", data.token);
-
+                
                 // Redirige vers la page d'accueil
-                window.location.href = "index.html";
+                window.location.href = "/FrontEnd/admin.html";
+
             } else {
                 // Gère les erreurs de connexion (par exemple, mauvais identifiants)
                 const errorMessage = document.getElementById("error-message");
@@ -134,11 +75,15 @@ function listenerEnvoiIdentifiant() {
     });
 }
 
-/*if (identifiants.value === identifiantsEnregistres.body.value) {
-            window.open("google.com")
-        }*/
-/*Initialiser variable
-Si quand j'écris dans les champs email et password les bonnes valeurs, 
-alors l'utilisateur est connecté
-et la page d'accueil s'affiche
-*/
+listenerEnvoiIdentifiant()
+
+// const logIn = document.getElementById("login")
+
+// const data = await reponse.json();
+// window.localStorage.setItem("authToken", data.token);
+// const token = window.localStorage.getItem("authToken")
+// if (token === true) {
+//     logIn.innerText = "login"
+// } else {
+//     logIn.innerText = "logout"
+// }
