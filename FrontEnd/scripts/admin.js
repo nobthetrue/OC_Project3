@@ -24,14 +24,54 @@ btnModifier.addEventListener("click", function(event) {
 
 })*/
 
+let modal = null
+
 const lienModal = document.querySelector(".modifier")
 lienModal.addEventListener("click", function (event) {
     event.preventDefault()
-    const modal = querySelector(".modal")
-    const target = document.querySelector(event.target.getAttribute("href"))
-    target.style.display = null
-    target.removeAttribute("aria-hidden")
-    target.setAttribute("ariamodal", "true")
-    modal = target
-    modal.addEventListener("click")
+    const modalOuverte = document.getElementById("modal")
+    modalOuverte.style.display = null
+    modalOuverte.removeAttribute("aria-hidden")
+    modalOuverte.setAttribute("aria-modal", "true")
+    modal = modalOuverte
+    modal.addEventListener("click", closeModal)
+    modal.querySelector(".btn-fermer-modal").addEventListener("click", closeModal)
+    modal.querySelector(".modal-stop").addEventListener("click", stopPropagation)
+
 })
+
+const closeModal = function (event) {
+    event.preventDefault()
+    if (modal === null)
+        return
+        modal.style.display = "none"
+        modal.setAttribute("aria-hidden", "true")
+        modal.removeAttribute("aria-modal")
+        modal.removeEventListener("click", closeModal)
+        modal.querySelector(".btn-fermer-modal").removeEventListener("click", closeModal)
+        modal.querySelector(".modal-stop").removeEventListener("click", stopPropagation)
+        modal = null
+}
+
+const stopPropagation = function (event) {
+    event.stopPropagation()
+}
+
+window.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" || event.key ==="Esc") {
+        closeModal(event)
+    }
+})
+
+// const ouvrirModal = function(e) {
+//     e.preventDefault()
+//     const target = document.querySelector(e.target.getAttribute("href"))
+//     target.style.display = null
+//     target.removeAttribute("aria-hidden")
+//     target.setAttribute("aria-modal", "true")
+// }
+
+// document.querySelectorAll(".modifier").forEach(a => {
+//     a.addEventListener("click", ouvrirModal)
+// })
+
