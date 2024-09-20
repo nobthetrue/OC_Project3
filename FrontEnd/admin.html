@@ -7,8 +7,12 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-    <meta name="description" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<meta name="description" content="">	
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/admin.css">
 	<script src="scripts/main.js" defer></script>
 	<script src="scripts/connexion.js" defer></script>
 	<script src="scripts/admin.js" defer></script>
@@ -19,15 +23,17 @@
         <i class="fa-solid fa-pen-to-square"></i>
         <p>Mode édition</p>
     </div>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav id="nav-entete">
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li ><a id="login" href="connexion.html">logout</a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+	<div class="entete">
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<nav id="nav-entete">
+			<ul>
+				<li>projets</li>
+				<li>contact</li>
+				<li ><a id="login" href="connexion.html">logout</a></li>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</div>
 </header>
 <main>
 	<section id="introduction">
@@ -42,12 +48,27 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<div>
+		<div class="edition-modifier">
 			<h2>Mes Projets</h2>
-			<div class="modifier">
-
+			<a href="#modal" class="modifier">
+				<i class="fa-solid fa-pen-to-square"></i>
+				<h4>modifier</h4>
+			</a>
+			<aside class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display:none;">
+				<div class="modalwrapper">
+					<button><i class="fa-solid fa-xmark"></i></button>
+					<div class="form-modifier">
+						<h3 id="titlemodal">Galerie Photo</h3>
+						<div class="supprimer-photo">
+				
+						</div>
+						<button id="btn-ajouter-photo"></button>
+					</div>
+				</div>
+			</aside>
+		</div>
 		<div class="gallery">
-
+			
 		</div>
 	</section>
 	<section id="contact">
@@ -63,6 +84,7 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+	
 </main>
 
 <footer>
@@ -72,5 +94,7 @@
 		</ul>
 	</nav>
 </footer>
+
 </body>
 </html>
+
