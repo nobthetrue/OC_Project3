@@ -12,16 +12,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 100px;
+    margin-top: 140px;
+    border: solid 3px green;
+}
+
+.edition-modifier h2,a {
+    margin: 0 15px;
 }
 
 .modifier {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #FFFEF8;
+
     border: none;
     font-family: 'Work Sans' ;
 	font-size: 14px;
+    width: 84px;
+    color: black;
+    text-decoration: none;
 }
 
 /*Partie Modal*/
@@ -45,7 +52,6 @@
     width: 630px;
     height: 680px;
     border-radius: 10px;
-    border: solid 2px red ;
     box-sizing: content-box;
 }
 
@@ -53,9 +59,10 @@
 .div-btn-fermer-modal {
     display: flex;
     justify-content: end;
+    margin: 25px;
 }
 
-.btn-fermer-modal {
+.btn-fermer-modal, .btn-retour {
     height: 24px;
     border: none;
     background-color: white;
@@ -63,28 +70,36 @@
     
 }
 
+
 /*Partie Contenant Les Deux Sections De La Modale*/
-.form-modifier {
+/* .form-modifier {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border: solid 1px black;
-}
+} */
 
 .form-modifier h3 {
     font-size: 26px;
 }
 
 /*Section 1 De La Modale*/
+.section-modal-supprimer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    padding: 0 105px;
+}
+
 .partie-supprimer-photo {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 8px;
     border-bottom: solid 1px #B3B3B3;
-    width: 420px;
-    height: 350px;
-    overflow: auto;
+    padding-bottom: 50px;
+    margin-top: 20px;
 }
 
 #btn-ajouter-photo {
@@ -92,49 +107,93 @@
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
+	margin: 40px 0 0 0;
+	width: 237px;
+    height: 36px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 }
 
 /*Section 2 De La Modale*/
 .section-modal-ajout {
     flex-direction: column;
+    margin-top: 0;
+    padding: 0 105px;
+}
+
+.section-modal-ajout h3 {
+    display: flex;
     justify-content: center;
-    align-items: center;
-    border: solid 3px red;
 }
 
 .partie-ajouter-photo {
     display: flex;
     flex-direction: column;
+	margin-top: 30px;
+    font-size: 1.2em;
+    padding-bottom: 50px;
+    border-bottom: solid 1px #B3B3B3;
 }
 
 .ajout-photo {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    background-color: #E8F1F6;
+    padding: 15px;
+    margin: 10px 0;
 }
 
-.partie-ajouter-photo {
-	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
+.ajout-photo i {
+    color: #B9C5CC;
+    font-size: 68px;
 }
 
-.partie-ajouter-photo {
-	height: 50px;
+.ajout-photo label {
+    background-color: #CBD6DC;
+    color: #306685;
+    padding: 10px 33px;
+    border-radius: 50px;
+}
+
+.ajout-photo p {
+    color: #444444;
+    font-size: 10px;
+}
+
+.partie-ajouter-photo label {
+	margin: 1em 0 0.6em 0 ;
+}
+
+.partie-ajouter-photo #titre,#categorie {
+    height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-.partie-ajouter-photo label {
-	margin: 2em 0 1em 0;
+
+.btn-valider-photo {
+    font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #A7A7A7;
+	margin : 2em auto;
+	text-align: center;
+	border-radius: 60px;
+    border: none;
+    padding: 10px 0;
+    width: 237px;
+    margin-bottom: 0;
 }
-#titre {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+
+select {
+    border: none;
+    outline: none;
+    -webkit-appearance: none; /* Supprime l'apparence par défaut (sauf la flèche) dans Chrome/Safari */
+    -moz-appearance: none; /* Supprime l'apparence par défaut dans Firefox */
+    appearance: none; /* Supprime l'apparence par défaut dans tous les navigateurs */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path fill="none" stroke="black" stroke-width="2" d="M1 1 L5 5 L9 1"/></svg>'); /* Crée une flèche personnalisée */
+    background-repeat: no-repeat;
+    background-position: right 30px center;
+    background-size: 10px;
 }

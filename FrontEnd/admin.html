@@ -51,12 +51,12 @@
 		<div class="edition-modifier">
 			<h2>Mes Projets</h2>
 			<a href="#modal" class="modifier">
-				<i class="fa-solid fa-pen-to-square"></i>
-				<h4>modifier</h4>
+				<i class="fa-regular fa-pen-to-square"><span>modifier</span></i>
 			</a>
 			<aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display:none;">
 				<div class="modalwrapper modal-stop">
 					<div class="div-btn-fermer-modal">
+						<button class="btn-retour" hidden><i class="fa-solid fa-arrow-left"></i></button>
 						<button class="btn-fermer-modal"><i class="fa-solid fa-xmark"></i></button>
 					</div>
 					<div class="form-modifier">
@@ -73,18 +73,19 @@
 								<div class="ajout-photo">
 									<i class="fa-regular fa-image"></i>
 									<label for="photo">+ Ajouter photo</label>
-									<input type="file" id="photo" name="photo" accept="image/png, image/jpg"/>
+									<input type="file" id="photo" name="photo" accept="image/png, image/jpg" hidden/>
+									<p>jpg, png : 4mo max</p>
 								</div>
 								<label for="titre">Titre</label>
 								<input type="text" name="titre" id="titre">
 								<label for="categorie">Catégorie</label>
-								<select name="categorie" id="categorie" required>	
+								<select name="categorie"  id="categorie" >	
 									<option>Objets</option>
 									<option>Appartements</option>
 									<option>Hotels & restaurants</option>
 								</select>
-								<button class="btn-valider-photo" id="btn-valider-photo" type="submit">Valider</button>
 							</form>	
+							<button class="btn-valider-photo" id="btn-valider-photo" type="submit">Valider</button>
 						</section>
 					</div>
 				</div>

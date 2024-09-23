@@ -11,7 +11,6 @@ lienModal.addEventListener("click", function (event) {
     modal.addEventListener("click", closeModal)
     modal.querySelector(".btn-fermer-modal").addEventListener("click", closeModal)
     modal.querySelector(".modal-stop").addEventListener("click", stopPropagation)
-
 })
 
 const closeModal = function (event) {
@@ -53,6 +52,7 @@ async function imageWorksGallerySuppression() {
         divImage.style.position = "relative";
         divImage.style.width = "76px";
         divImage.style.height = "102px";
+        divImage.style.marginTop = "20px"
 
         sectionImagesWorks.appendChild(divImage);
 
@@ -102,9 +102,15 @@ ouvertureFenetreAjoutPhoto.addEventListener("click", function (event) {
     /*Supprime 1ere section et ajoute la 2eme*/
     const sectionModalSupprimer = document.querySelector(".section-modal-supprimer")
     sectionModalSupprimer.remove()
+
     const sectionModalAjout = document.querySelector(".section-modal-ajout")
     sectionModalAjout.style.display = "flex"
+
+    const btnRetour = document.querySelector(".btn-retour")
+    btnRetour.removeAttribute("hidden")
     
+    const divBtnFermerModal = document.querySelector(".div-btn-fermer-modal")
+    divBtnFermerModal.style.justifyContent = "space-between"
 
     const partieAjouterPhoto = document.getElementById("partie-ajouter-photo")
 
