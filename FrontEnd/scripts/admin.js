@@ -1,29 +1,3 @@
-/*const btnModifier = document.querySelector(".modifier")
-btnModifier.addEventListener("click", function(event) {
-    event.preventDefault()
-    btnModifier.innerHTML = ""
-    
-    const conteneurModifier = document.createElement("div")
-    conteneurModifier.classList.add("conteneur")
-
-    const conteneurFormulaire = document.createElement("div")
-    conteneurFormulaire.classList.add("conteneur-formulaire")
-    conteneurModifier.appendChild(conteneurFormulaire)
-    
-    const croixQuitter = document.createElement("i")
-    croixQuitter.classList.add("fa-solid fa-xmark")
-    conteneurModifier.appendChild(croixQuitter)
-
-    const titreGalerieModifier = document.createElement("h3")
-    titreGalerieModifier.innerText = "Galerie Photo"
-    conteneurModifier.appendChild(titreGalerieModifier)
-
-    
-
-    btnModifier.appendChild(conteneurModifier)
-
-})*/
-
 let modal = null
 
 const lienModal = document.querySelector(".modifier")
@@ -63,15 +37,83 @@ window.addEventListener("keydown", function (event) {
     }
 })
 
-// const ouvrirModal = function(e) {
-//     e.preventDefault()
-//     const target = document.querySelector(e.target.getAttribute("href"))
-//     target.style.display = null
-//     target.removeAttribute("aria-hidden")
-//     target.setAttribute("aria-modal", "true")
-// }
+const titreSectionImagesWorks = document.getElementById("titlemodal");
+const sectionImagesWorks = document.querySelector(".partie-supprimer-photo");
 
-// document.querySelectorAll(".modifier").forEach(a => {
-//     a.addEventListener("click", ouvrirModal)
-// })
+async function imageWorksGallerySuppression() {
+    let works = 0;
+    const response = await fetch("http://localhost:5678/api/works");
+    works = await response.json();
+    sectionImagesWorks.innerHTML = '';
 
+    for (let i = 0; i < works.length; i++) {
+        const project = works[i];
+
+        const divImage = document.createElement("div");
+        divImage.style.position = "relative";
+        divImage.style.width = "76px";
+        divImage.style.height = "102px";
+
+        sectionImagesWorks.appendChild(divImage);
+
+        const imageElement = document.createElement("img");
+        imageElement.src = project.imageUrl;
+        imageElement.style.height = "102px";
+        imageElement.style.width = "76px";
+
+        const conteneurBtnSupprimer = document.createElement("button");
+        conteneurBtnSupprimer.setAttribute("type", "button");
+        conteneurBtnSupprimer.classList.add("btn-supprimer-image");
+        conteneurBtnSupprimer.style.right = "5px";
+        conteneurBtnSupprimer.style.top = "5px";
+        conteneurBtnSupprimer.style.display = "flex";
+        conteneurBtnSupprimer.style.justifyContent = "center";
+        conteneurBtnSupprimer.style.alignItems = "center";
+        conteneurBtnSupprimer.style.backgroundColor = "black";
+        conteneurBtnSupprimer.style.position = "absolute";
+        conteneurBtnSupprimer.style.height = "17px";
+        conteneurBtnSupprimer.style.width = "17px";
+        conteneurBtnSupprimer.style.borderRadius = "2px";
+        conteneurBtnSupprimer.style.border = "none";
+
+        const iconePoubelle = document.createElement("i");
+        iconePoubelle.classList.add("fa-solid", "fa-trash-can");
+        iconePoubelle.style.fontSize = "0.7em";
+        iconePoubelle.style.color = "white";
+
+        conteneurBtnSupprimer.appendChild(iconePoubelle);
+
+        divImage.appendChild(conteneurBtnSupprimer);
+        divImage.appendChild(imageElement);
+
+        conteneurBtnSupprimer.addEventListener("click", function (event) {
+            event.preventDefault();
+            divImage.remove();
+        });
+    }
+}
+
+imageWorksGallerySuppression();
+
+const ouvertureFenetreAjoutPhoto = document.querySelector(".btn-ajouter-photo")
+ouvertureFenetreAjoutPhoto.addEventListener("click", function (event) {
+    event.preventDefault()
+    
+    /*Supprime 1ere section et ajoute la 2eme*/
+    const sectionModalSupprimer = document.querySelector(".section-modal-supprimer")
+    sectionModalSupprimer.remove()
+    const sectionModalAjout = document.querySelector(".section-modal-ajout")
+    sectionModalAjout.style.display = "flex"
+    
+
+    const partieAjouterPhoto = document.getElementById("partie-ajouter-photo")
+
+})
+
+function creerSupprimerPhoto () {
+
+}
+
+function creerAjoutPhoto () {
+
+}
