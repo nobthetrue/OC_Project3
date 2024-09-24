@@ -96,9 +96,10 @@
 .partie-supprimer-photo {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     gap: 8px;
+    height: 430px;
     border-bottom: solid 1px #B3B3B3;
-    padding-bottom: 50px;
     margin-top: 20px;
 }
 
