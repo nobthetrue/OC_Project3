@@ -3,7 +3,7 @@ let works = [];
 async function fetchAndDisplayWorks() {
     const response = await fetch("http://localhost:5678/api/works");
     works = await response.json();
-    const sectionWorks = document.querySelector(".gallery");
+    const sectionWorks = document.getElementById("gallery");
     sectionWorks.innerHTML = '';
 
     for (let i = 0; i < works.length; i++) {
@@ -35,7 +35,6 @@ function toggleActiveButton(activeButton) {
     activeButton.classList.add("active");
 }
 
-// Fonction pour mettre à jour la galerie avec les travaux filtrés
 function updateGallery(filteredWorks) {
     const sectionWorks = document.querySelector(".gallery");
     sectionWorks.innerHTML = ''; 

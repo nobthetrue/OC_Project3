@@ -1,4 +1,4 @@
-const formulaireConnexion = document.querySelector(".formulaire-connexion");
+const formulaireConnexion = document.getElementById("formulaire-connexion");
 
 formulaireConnexion.addEventListener("submit", function(event) {
 
@@ -50,7 +50,7 @@ function listenerEnvoiIdentifiant() {
 
                 window.localStorage.setItem("authToken", data.token);
                 
-                window.location.href = "/FrontEnd/admin.html";
+                window.location.href = "admin.html";
 
             } else {
                 const errorMessage = document.getElementById("error-message");
