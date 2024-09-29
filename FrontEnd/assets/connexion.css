@@ -1,0 +1,72 @@
+#login {
+    font-weight: 600;
+}
+
+.formulaire-connexion {
+    width: 380px;
+}
+
+main {
+    margin-bottom: 340px;
+}
+
+.main-login {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 500px;
+}
+
+.main-login form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.main-login p {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.main-login {
+	width: 50%;
+	margin: auto;
+}
+.main-login > * {
+	text-align: center;
+
+}
+.main-login h2{
+	margin-bottom: 20px;
+}
+.main-login form {
+	display: flex;
+	flex-direction: column;
+}
+
+.main-login input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.main-login label {
+    text-align: left;
+	margin: 2em 0 0.5em 0;
+}
+.main-login textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+input[type="submit"]{
+	font-family: 'Syne';
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 210px;
+	text-align: center;
+	border-radius: 60px ;
+	height: 42px;
+}

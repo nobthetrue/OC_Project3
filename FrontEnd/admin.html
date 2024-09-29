@@ -24,7 +24,7 @@
         <p>Mode édition</p>
     </div>
 	<div class="entete">
-		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<h1>Sophie Bluel <span>ARCHITECTE D'INTÉRIEUR</span></h1>
 		<nav id="nav-entete">
 			<ul>
 				<li>projets</li>
@@ -44,14 +44,15 @@
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+			<p>En cas de besoin, une équipe pluridisciplinaire constituée de : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
 	<section id="portfolio">
 		<div class="edition-modifier">
 			<h2>Mes Projets</h2>
 			<a href="#modal" class="modifier">
-				<i class="fa-regular fa-pen-to-square"><span>modifier</span></i>
+				<i class="fa-regular fa-pen-to-square"></i>
+				<p>modifier</p>
 			</a>
 			<aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display:none;">
 				<div class="modalwrapper modal-stop">
@@ -70,20 +71,27 @@
 						<section class="section-modal-ajout" style="display:none">
 							<h3 id="titlemodal">Ajout photo</h3><!-- modifier id en class -->
 							<form class="partie-ajouter-photo">
-								<div class="ajout-photo">
-									<i class="fa-regular fa-image"></i>
-									<label for="photo">+ Ajouter photo</label>
-									<input type="file" id="photo" name="photo" accept="image/png, image/jpg" hidden/>
-									<p>jpg, png : 4mo max</p>
+								<div class="changement-fiche-photo">
+									<div class="ajout-photo">
+										<i class="fa-regular fa-image"></i>
+										<label for="photo">+ Ajouter photo</label>
+										<input type="file" id="photo" name="photo" accept="image/png, image/jpg" hidden/>
+										<span id="error-message-file" style="color: red;"></span>
+										<p>jpg, png : 4mo max</p>
+									</div>
+									<div id="preview"></div>
 								</div>
 								<label for="titre">Titre</label>
 								<input type="text" name="titre" id="titre">
+								<span id="error-message-titre" style="color: red;"></span>
 								<label for="categorie">Catégorie</label>
-								<select name="categorie"  id="categorie" >	
-									<option>Objets</option>
-									<option>Appartements</option>
-									<option>Hotels & restaurants</option>
+								<select name="categorie"  id="categorie">
+									<option value="" disabled selected hidden></option>	
+									<option value="Objet">Objets</option>
+									<option value="Appartements">Appartements</option>
+									<option value="Hotels & Restaurants">Hotels & Restaurants</option>
 								</select>
+								<span id="error-message-categorie" style="color: red;"></span>
 							</form>	
 							<button class="btn-valider-photo" id="btn-valider-photo" type="submit">Valider</button>
 						</section>
@@ -108,17 +116,15 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
-	
 </main>
 
 <footer>
-	<nav>
+	<nav class="mentions-legales">
 		<ul>
-			<li>Mentions Légales</li>
+			<li>Mentions légales</li>
 		</ul>
 	</nav>
 </footer>
-
 </body>
 </html>
 

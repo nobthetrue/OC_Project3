@@ -1,4 +1,4 @@
-let works = 0; // Déclarer works en dehors de la fonction
+let works = []; // Déclarer works en dehors de la fonction
 
 async function fetchAndDisplayWorks() {
     const response = await fetch("http://localhost:5678/api/works");
@@ -17,6 +17,7 @@ async function fetchAndDisplayWorks() {
 
         const figcaptionElement = document.createElement("figcaption");
         figcaptionElement.innerText = project.title;
+        figcaptionElement.style.marginTop = "5px"
 
         figureElement.appendChild(imageElement);
         figureElement.appendChild(figcaptionElement);
@@ -25,22 +26,27 @@ async function fetchAndDisplayWorks() {
 
 fetchAndDisplayWorks();
 
+// Sélectionner tous les boutons de filtre
+const allButtons = document.querySelectorAll("#btn-gallery");
 
-const btnObjets = document.querySelector(".btn-filtre-objets");
-btnObjets.addEventListener("click", function() {
-    const objetsFiltrer = works.filter(function(work) {
-        return work.categoryId === 1; // Utilisation de === pour comparer
+// Fonction pour gérer les boutons actifs
+function toggleActiveButton(activeButton) {
+    allButtons.forEach(button => {
+        button.classList.remove("active");  // Retirer la classe active de tous les boutons
     });
+    activeButton.classList.add("active");  // Ajouter la classe active au bouton cliqué
+}
 
-    // Met à jour la galerie avec les objets filtrés
+// Fonction pour mettre à jour la galerie avec les travaux filtrés
+function updateGallery(filteredWorks) {
     const sectionWorks = document.querySelector(".gallery");
-    sectionWorks.innerHTML = '';
+    sectionWorks.innerHTML = ''; // Vider la galerie actuelle
 
-    objetsFiltrer.forEach(function(project) {
+    filteredWorks.forEach(function(project) {
         const figureElement = document.createElement("figure");
 
         const imageElement = document.createElement("img");
-        imageElement.src = project.imageUrl;
+        imageElement.src = project.imageUrl; // Utilise l'URL de l'image du projet
 
         const figcaptionElement = document.createElement("figcaption");
         figcaptionElement.innerText = project.title;
@@ -50,83 +56,28 @@ btnObjets.addEventListener("click", function() {
 
         sectionWorks.appendChild(figureElement);
     });
-});
+}
 
-const btnAppartements = document.querySelector(".btn-filtre-appartements");
-btnAppartements.addEventListener("click", function() {
-    const appartementsFiltrer = works.filter(function(work) {
-        return work.categoryId === 2; // Utilisation de === pour comparer
-    });
+// Ajout d'événements pour chaque bouton
+allButtons.forEach(button => {
+    button.addEventListener("click", function() {
+        toggleActiveButton(button);  // Changer le style actif sur le bouton cliqué
 
-    // Met à jour la galerie avec les objets filtrés
-    const sectionWorks = document.querySelector(".gallery");
-    sectionWorks.innerHTML = '';
-
-    appartementsFiltrer.forEach(function(project) {
-        const figureElement = document.createElement("figure");
-
-        const imageElement = document.createElement("img");
-        imageElement.src = project.imageUrl;
-
-        const figcaptionElement = document.createElement("figcaption");
-        figcaptionElement.innerText = project.title;
-
-        figureElement.appendChild(imageElement);
-        figureElement.appendChild(figcaptionElement);
-
-        sectionWorks.appendChild(figureElement);
-    });
-});
-
-const btnHotelsEtRestaurants = document.querySelector(".btn-filtre-hotels-et-restaurants");
-btnHotelsEtRestaurants.addEventListener("click", function() {
-    const hotelsEtRestaurantsFiltrer = works.filter(function(work) {
-        return work.categoryId === 3; // Utilisation de === pour comparer
-    });
-
-    // Met à jour la galerie avec les objets filtrés
-    const sectionWorks = document.querySelector(".gallery");
-    sectionWorks.innerHTML = '';
-
-    hotelsEtRestaurantsFiltrer.forEach(function(project) {
-        const figureElement = document.createElement("figure");
-
-        const imageElement = document.createElement("img");
-        imageElement.src = project.imageUrl;
-
-        const figcaptionElement = document.createElement("figcaption");
-        figcaptionElement.innerText = project.title;
-
-        figureElement.appendChild(imageElement);
-        figureElement.appendChild(figcaptionElement);
-
-        sectionWorks.appendChild(figureElement);
-    });
-});
-
-const btnTous = document.querySelector(".btn-filtre-tous");
-btnTous.addEventListener("click", function() {
-        const tousFiltrer = works.filter(function(work) {
-        return work.categoryId != 0;
-        });
-    
-
-    // Met à jour la galerie avec les objets filtrés
-    const sectionWorks = document.querySelector(".gallery");
-    sectionWorks.innerHTML = '';
-
-    tousFiltrer.forEach(function(project) {
-        const figureElement = document.createElement("figure");
-
-        const imageElement = document.createElement("img");
-        imageElement.src = project.imageUrl;
-
-        const figcaptionElement = document.createElement("figcaption");
-        figcaptionElement.innerText = project.title;
-
-        figureElement.appendChild(imageElement);
-        figureElement.appendChild(figcaptionElement);
-
-        sectionWorks.appendChild(figureElement);
+        let filteredWorks;
+        switch (button.innerText) {
+            case 'Objets':
+                filteredWorks = works.filter(work => work.categoryId === 1); // ID pour "Objets"
+                break;
+            case 'Appartements':
+                filteredWorks = works.filter(work => work.categoryId === 2); // ID pour "Appartements"
+                break;
+            case 'Hôtels & restaurants':
+                filteredWorks = works.filter(work => work.categoryId === 3); // ID pour "Hôtels & Restaurants"
+                break;
+            default:
+                filteredWorks = works;  // Affiche tous les travaux
+                break;
+        }
+        updateGallery(filteredWorks);  // Mettre à jour la galerie
     });
 });
