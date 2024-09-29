@@ -54,7 +54,6 @@ async function imageWorksGallerySuppression() {
         divImage.style.height = "102px";
         divImage.style.marginTop = "20px";
 
-        // Ajouter un attribut `data-id` à `divImage` pour stocker l'ID de l'image
         divImage.setAttribute("data-id", project.id);
 
         sectionImagesWorks.appendChild(divImage);
@@ -88,14 +87,11 @@ async function imageWorksGallerySuppression() {
         divImage.appendChild(conteneurBtnSupprimer);
         divImage.appendChild(imageElement);
 
-        // Ajout de l'événement click pour supprimer l'image
         conteneurBtnSupprimer.addEventListener("click", async function (event) {
             event.preventDefault();
             
-            // Récupérer l'ID de l'image depuis `data-id`
             const imageId = divImage.getAttribute("data-id");
 
-            // Récupérer le token stocké dans localStorage
             const token = localStorage.getItem("authToken");
 
             if (!token) {
@@ -104,20 +100,17 @@ async function imageWorksGallerySuppression() {
             }
 
             try {
-                // Préparation de la requête DELETE avec le token dans les en-têtes
                 const worksDelete = {
                     method: "DELETE",
                     headers: {
-                        "Authorization": `Bearer ${token}`, // Inclure le token JWT ici
+                        "Authorization": `Bearer ${token}`, 
                         "Content-Type": "application/json",
                     }
                 };
 
-                // Appel à l'API pour supprimer l'image
                 const response = await fetch(`http://localhost:5678/api/works/${imageId}`, worksDelete);
 
                 if (response.ok) {
-                    // Si la suppression réussit, on retire l'image du DOM
                     divImage.remove();
                     console.log(`Photo avec l'ID ${imageId} supprimée.`);
                 } else {
@@ -129,7 +122,6 @@ async function imageWorksGallerySuppression() {
         });
     }
 }
-// Appeler la fonction pour initialiser la galerie
 imageWorksGallerySuppression();
 
 const ouvertureFenetreAjoutPhoto = document.querySelector(".btn-ajouter-photo")
@@ -152,43 +144,36 @@ ouvertureFenetreAjoutPhoto.addEventListener("click", function (event) {
     btnRetour.addEventListener("click", function (event) {
         event.preventDefault()
 
-        // Masquer la section d'ajout de photo et réafficher la première section
         sectionModalAjout.style.display = "none";
-        sectionModalSupprimer.style.display = "flex"; // Réaffiche la première section
+        sectionModalSupprimer.style.display = "flex"; 
 
-        // Masquer à nouveau le bouton retour
         btnRetour.setAttribute("hidden", "true");
 
-        // Réajuster la position du bouton fermer
         divBtnFermerModal.style.justifyContent = "flex-end";
     })
 })
 
-// function creerAjoutPhoto () {
-
-// }
 const fileReader = new FileReader()
 const inputImage = document.getElementById("photo")
 inputImage.addEventListener("change", function () {
-    const file = inputImage.files[0];  // Obtenir le fichier sélectionné
+    const file = inputImage.files[0]; 
     if (file) {
-        fileReader.readAsDataURL(file); // Lire le fichier en tant que Data URL
+        fileReader.readAsDataURL(file); 
     }
 
-    // Lorsque la lecture est terminée, afficher l'image
     fileReader.onload = function(event) {
         event.preventDefault()
         const elementSupprimer = document.querySelector(".ajout-photo")
         elementSupprimer.style.display = "none"
 
-        const imgElement = document.createElement('img'); // Créer un élément image
-        imgElement.src = event.target.result;  // Lier l'URL de données à l'élément image
-        imgElement.style.width = "130px";   // Fixer la taille maximale de l'image
-        imgElement.style.height = "180px";  // Fixer la hauteur maximale de l'image
+        const imgElement = document.createElement('img');
+        imgElement.src = event.target.result; 
+        imgElement.style.width = "130px";  
+        imgElement.style.height = "180px"; 
 
         const preview = document.getElementById('preview');
-        preview.innerHTML = ''; // Vider le contenu précédent
-        preview.appendChild(imgElement); // Ajouter l'image à l'écran
+        preview.innerHTML = ''; 
+        preview.appendChild(imgElement); 
     };
 });
 
@@ -197,26 +182,22 @@ const categorie = document.getElementById("categorie");
 const photo = document.getElementById("photo");
 const btnValiderPhoto = document.querySelector(".btn-valider-photo");
 
-// Fonction pour vérifier les champs et activer le bouton
 function verifierChamps() {
     if (photo.files.length > 0 && titre.value.trim() != "" && categorie.value.trim() != "") {
-        btnValiderPhoto.style.backgroundColor = "#1D6154"; // Activer le bouton
+        btnValiderPhoto.style.backgroundColor = "#1D6154"; 
 
-        // Ajout d'un événement click pour soumettre le travail
         btnValiderPhoto.addEventListener("click", envoyerNouveauTravail);
     } else {
-        btnValiderPhoto.style.backgroundColor = ""; // Désactiver le bouton
-        btnValiderPhoto.removeEventListener("click", envoyerNouveauTravail); // Retirer l'événement click si les champs sont invalides
+        btnValiderPhoto.style.backgroundColor = ""; 
+        btnValiderPhoto.removeEventListener("click", envoyerNouveauTravail);
     }
 }
 
-// Fonction pour envoyer le nouveau travail à l'API
 async function envoyerNouveauTravail(event) {
-    event.preventDefault(); // Empêcher le comportement par défaut du bouton
+    event.preventDefault(); 
 
     const token = localStorage.getItem("authToken");
 
-    // Déterminer l'ID de la catégorie en fonction du texte sélectionné
     let categorieId;
     switch (categorie.value) {
         case "Objet":
@@ -233,28 +214,24 @@ async function envoyerNouveauTravail(event) {
             return;
     }
 
-    // Préparation des données avec FormData
     const formData = new FormData();
-    formData.append("image", photo.files[0]); // Ajoute l'image sélectionnée
-    formData.append("title", titre.value); // Ajoute le titre
-    formData.append("category", categorieId); // Ajoute l'ID de la catégorie
+    formData.append("image", photo.files[0]);
+    formData.append("title", titre.value);
+    formData.append("category", categorieId);
 
     try {
-        // Envoi de la requête POST avec les données du formulaire
         const response = await fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`, // Inclure le token d'authentification
+                "Authorization": `Bearer ${token}`,
             },
-            body: formData, // Le corps de la requête est le FormData
+            body: formData,
         });
 
-        // Vérification de la réponse de l'API
         if (response.ok) {
             const nouveauTravail = await response.json();
             console.log("Travail ajouté avec succès :", nouveauTravail);
 
-            // Optionnel : Tu peux ici mettre à jour l'interface avec le nouveau travail ajouté
         } else {
             console.error("Erreur lors de l'ajout du travail :", response.statusText);
         }
@@ -263,128 +240,8 @@ async function envoyerNouveauTravail(event) {
     }
 }
 
-// Écouteurs d'événements sur les champs pour vérifier les valeurs
 titre.addEventListener("input", verifierChamps);
 categorie.addEventListener("change", verifierChamps);
 photo.addEventListener("change", verifierChamps);
 
-verifierChamps(); // Initialiser la vérification des champs
-
-
-// Sélection des éléments
-// const titre = document.getElementById("titre");
-// const categorie = document.getElementById("categorie");
-// const photo = document.getElementById("photo");
-// const btnValiderPhoto = document.querySelector(".btn-valider-photo");
-
-// // Fonction pour vérifier les champs et activer le bouton
-// function verifierChamps() {
-//     if (photo.files.length > 0 && titre.value.trim() != "" && categorie.value.trim() != "") {
-//         btnValiderPhoto.style.backgroundColor = "#1D6154"; // Activer le bouton
-
-//         // Ajout d'un événement click pour soumettre le travail
-//         btnValiderPhoto.addEventListener("click", envoyerNouveauTravail);
-//     } else {
-//         btnValiderPhoto.style.backgroundColor = ""; // Désactiver le bouton
-//         btnValiderPhoto.removeEventListener("click", envoyerNouveauTravail); // Retirer l'événement click si les champs sont invalides
-//     }
-// }
-
-// // Fonction pour envoyer le nouveau travail à l'API
-// async function envoyerNouveauTravail(event) {
-//     event.preventDefault(); // Empêcher le comportement par défaut du bouton
-
-//     const token = localStorage.getItem("authToken");
-
-//     // Préparation des données avec FormData
-//     const formData = new FormData();
-//     formData.append("image", photo.files[0]); // Ajoute l'image sélectionnée
-//     formData.append("title", titre.value); // Ajoute le titre
-//     formData.append("category", categorie.value); // Ajoute la catégorie
-
-//     try {
-//         // Envoi de la requête POST avec les données du formulaire
-//         const response = await fetch("http://localhost:5678/api/works", {
-//             method: "POST",
-//             headers: {
-//                 "Authorization": `Bearer ${token}`, // Inclure le token d'authentification
-//             },
-//             body: formData, // Le corps de la requête est le FormData
-//         });
-
-//         // Vérification de la réponse de l'API
-//         if (response.ok) {
-//             const nouveauTravail = await response.json();
-//             console.log("Travail ajouté avec succès :", nouveauTravail);
-
-//             // Optionnel : Tu peux ici mettre à jour l'interface avec le nouveau travail ajouté
-//         } else {
-//             console.error("Erreur lors de l'ajout du travail :", response.statusText);
-//         }
-//     } catch (error) {
-//         console.error("Erreur lors de la requête :", error);
-//     }
-// }
-
-// // Écouteurs d'événements sur les champs pour vérifier les valeurs
-// titre.addEventListener("input", verifierChamps);
-// categorie.addEventListener("change", verifierChamps);
-// photo.addEventListener("change", verifierChamps);
-
-// verifierChamps(); // Initialiser la vérification des champs
-
-// const titre = document.getElementById("titre");
-// const categorie = document.getElementById("categorie");
-// const photo = document.getElementById("photo");
-// const btnValiderPhoto = document.querySelector(".btn-valider-photo");
-
-// // Fonction pour vérifier les champs et activer/désactiver le bouton
-// function verifierChamps() {
-//     if (photo.files.length > 0 && titre.value.trim() != "" && categorie.value.trim() != "") {
-//         btnValiderPhoto.style.backgroundColor = "#1D6154";
-
-//         let works = 0
-//         function envoyerNouveauTravail() {
-            
-//             btnValiderPhoto.addEventListener("click", async function (event) {
-//                 event.preventDefault()
-                
-//                 const token = localStorage.getItem("authToken");
-
-//                 const nouveauTravail = {
-//                     imageUrl : event.target.querySelector("#photo").file.length,
-//                     title : event.target.querySelector("#titre").value,
-//                     categoryId : event.target.querySelector("#categorie").value 
-//                 }
-
-//                 const chargeUtile = JSON.stringify(nouveauTravail)
-
-//                 const reponse = await fetch("http://localhost:5678/api/works", {
-//                     method: "POST",
-//                     headers: {
-//                         "Authorization": `Bearer ${token}`, // Inclure le token JWT ici
-//                         "Content-Type": "application/json",
-//                         "Content-Type": "multipart/form-data" 
-//                     },
-//                     body: chargeUtile
-//                 });
-
-//                 works = await reponse.json()
-
-//                 if (reponse.ok) {
-//                     nouveauTravail.add();
-//                 }
-
-//             })
-//         }
-//         envoyerNouveauTravail()
-
-//     }
-//         // Écouteurs d'événements sur les champs
-//     titre.addEventListener("input", verifierChamps);
-//     categorie.addEventListener("change", verifierChamps);
-//     photo.addEventListener("change", verifierChamps);
-// }
-
-// verifierChamps()
-
+verifierChamps(); 
