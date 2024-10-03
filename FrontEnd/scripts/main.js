@@ -26,7 +26,7 @@ async function fetchAndDisplayWorks() {
 
 fetchAndDisplayWorks();
 
-const allButtons = document.querySelectorAll("#btn-gallery");
+const allButtons = document.querySelectorAll(".btn-gallery");
 
 function toggleActiveButton(activeButton) {
     allButtons.forEach(button => {
