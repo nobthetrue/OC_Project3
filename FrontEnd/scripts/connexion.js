@@ -34,7 +34,6 @@ function listenerEnvoiIdentifiant() {
             email: event.target.querySelector("#email").value,
             password: event.target.querySelector("#password").value
         };
-        console.log(identifiants)
         const chargeUtile = JSON.stringify(identifiants);
 
         try {
@@ -43,7 +42,6 @@ function listenerEnvoiIdentifiant() {
                 headers: { "Content-Type": "application/json" },
                 body: chargeUtile
             });
-            console.log(reponse)
 
             if (reponse.ok) {
                 const data = await reponse.json();
@@ -58,8 +56,6 @@ function listenerEnvoiIdentifiant() {
                 errorMessage.style.display = "block";
             }
         } catch (error) {
-            console.error("Erreur lors de la connexion :", error);
-            // Affiche un message d'erreur si la requête a échoué
             const errorMessage = document.getElementById("error-message");
             errorMessage.innerText = "Une erreur est survenue. Veuillez réessayer plus tard.";
             errorMessage.style.display = "block";

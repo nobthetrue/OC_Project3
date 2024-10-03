@@ -16,6 +16,8 @@ main {
 	justify-content: center;
 	align-items: center;
 	height: 500px;
+	width: 50%;
+	margin: auto;
 }
 
 .main-login form {
@@ -29,20 +31,12 @@ main {
 	text-decoration: underline;
 }
 
-.main-login {
-	width: 50%;
-	margin: auto;
-}
 .main-login > * {
 	text-align: center;
 
 }
 .main-login h2{
 	margin-bottom: 20px;
-}
-.main-login form {
-	display: flex;
-	flex-direction: column;
 }
 
 .main-login input {

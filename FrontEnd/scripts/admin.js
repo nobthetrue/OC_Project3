@@ -95,29 +95,21 @@ async function imageWorksGallerySuppression() {
             const token = localStorage.getItem("authToken");
 
             if (!token) {
-                console.error("Aucun token d'authentification trouvé. Veuillez vous connecter.");
                 return;
             }
 
-            try {
-                const worksDelete = {
-                    method: "DELETE",
-                    headers: {
-                        "Authorization": `Bearer ${token}`, 
-                        "Content-Type": "application/json",
-                    }
-                };
-
-                const response = await fetch(`http://localhost:5678/api/works/${imageId}`, worksDelete);
-
-                if (response.ok) {
-                    divImage.remove();
-                    console.log(`Photo avec l'ID ${imageId} supprimée.`);
-                } else {
-                    console.error(`Erreur lors de la suppression de l'image avec l'ID ${imageId}. Statut: ${response.status}`);
+            const worksDelete = {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`, 
+                    "Content-Type": "application/json",
                 }
-            } catch (error) {
-                console.error("Erreur réseau : ", error);
+            };
+
+            const response = await fetch(`http://localhost:5678/api/works/${imageId}`, worksDelete);
+
+            if (response.ok) {
+                divImage.remove();
             }
         });
     }
@@ -128,7 +120,6 @@ const ouvertureFenetreAjoutPhoto = document.querySelector(".btn-ajouter-photo")
 ouvertureFenetreAjoutPhoto.addEventListener("click", function (event) {
     event.preventDefault()
     
-    /*Supprime 1ere section et ajoute la 2eme*/
     const sectionModalSupprimer = document.querySelector(".section-modal-supprimer")
     sectionModalSupprimer.style.display = "none";
 
@@ -210,7 +201,6 @@ async function envoyerNouveauTravail(event) {
             categorieId = 3;
             break;
         default:
-            console.error("Catégorie non valide");
             return;
     }
 
@@ -219,25 +209,13 @@ async function envoyerNouveauTravail(event) {
     formData.append("title", titre.value);
     formData.append("category", categorieId);
 
-    try {
-        const response = await fetch("http://localhost:5678/api/works", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-            },
-            body: formData,
-        });
-
-        if (response.ok) {
-            const nouveauTravail = await response.json();
-            console.log("Travail ajouté avec succès :", nouveauTravail);
-
-        } else {
-            console.error("Erreur lors de l'ajout du travail :", response.statusText);
-        }
-    } catch (error) {
-        console.error("Erreur lors de la requête :", error);
-    }
+    const response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        },
+        body: formData,
+    });
 }
 
 titre.addEventListener("input", verifierChamps);
