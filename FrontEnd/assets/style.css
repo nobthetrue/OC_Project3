@@ -115,29 +115,29 @@ li:hover {
 	color: #B1663C;
 }
 
-#introduction {
+.introduction {
 	margin: 110px 255px;
 	display: flex;
 	align-items: center;
 }
-#introduction figure {
+.introduction figure {
 	display: flex;
 	flex: 1;
 }
-#introduction img {
+.introduction img {
 	display: block;
 	width: 474px;
 }
 
-#introduction article {
+.introduction article {
 	margin-left: 55px;
 	flex: 1;
 }
-#introduction h2 {
+.introduction h2 {
 	margin-bottom: 1em;
 }
 
-#introduction p {
+.introduction p {
 	margin-bottom: 1em;
 }
 
