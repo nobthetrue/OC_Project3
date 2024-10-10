@@ -1,3 +1,31 @@
+let works = [];
+
+async function fetchAndDisplayWorks() {
+    const response = await fetch("http://localhost:5678/api/works");
+    works = await response.json();
+    const sectionWorks = document.getElementById("gallery");
+    sectionWorks.innerHTML = '';
+
+    for (let i = 0; i < works.length; i++) {
+        const project = works[i];
+
+        const figureElement = document.createElement("figure");
+        sectionWorks.appendChild(figureElement);
+
+        const imageElement = document.createElement("img");
+        imageElement.src = project.imageUrl;
+
+        const figcaptionElement = document.createElement("figcaption");
+        figcaptionElement.innerText = project.title;
+        figcaptionElement.style.marginTop = "5px"
+
+        figureElement.appendChild(imageElement);
+        figureElement.appendChild(figcaptionElement);
+    }
+}
+
+fetchAndDisplayWorks();
+
 let modal = null
 
 const lienModal = document.querySelector(".modifier")
@@ -109,7 +137,8 @@ async function imageWorksGallerySuppression() {
             const response = await fetch(`http://localhost:5678/api/works/${imageId}`, worksDelete);
 
             if (response.ok) {
-                divImage.remove();
+                divImage.remove()
+                fetchAndDisplayWorks()
             }
         });
     }
@@ -216,6 +245,8 @@ async function envoyerNouveauTravail(event) {
         },
         body: formData,
     });
+    fetchAndDisplayWorks()
+    imageWorksGallerySuppression()
 }
 
 titre.addEventListener("input", verifierChamps);
